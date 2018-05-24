@@ -10,12 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_24_191525) do
+ActiveRecord::Schema.define(version: 2018_05_24_192505) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.boolean "is_lead_admin"
+  end
+
+  create_table "clients", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "files", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "url"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
   end
 
 end
