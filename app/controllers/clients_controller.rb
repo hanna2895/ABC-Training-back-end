@@ -10,9 +10,11 @@ class ClientsController < ApplicationController
 
   def show
     client = Client.find params[:id]
+    groups = client.groups
     render json: {
       status: 200,
-      client: client
+      client: client,
+      group: groups
     }
   end
 
