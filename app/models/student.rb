@@ -1,5 +1,6 @@
 class Student < ApplicationRecord
-  belongs_to :group
-  belongs_to :client, :through => :group
-  has_many :files, :through => :group
+  # belongs_to :group
+  has_many :groups
+  has_many :clients, :through => :groups
+  has_many :files, :through => :groups
 end
