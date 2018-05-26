@@ -51,4 +51,8 @@ class SessionsController < ApplicationController
     end
   end # end for create route
 
+  def destroy
+    session[:user_id] = nil
+  end
+
 end # end for controller

@@ -1,4 +1,5 @@
 class AdminsController < ApplicationController
+
   def index
     admins = Admin.all
     render json: {
@@ -18,7 +19,7 @@ class AdminsController < ApplicationController
   def create
     admin = Admin.new(admin_params)
     if admin.save
-      
+
       render json: {
         status: 201,
         admin: admin
