@@ -18,6 +18,8 @@ class AdminsController < ApplicationController
   def create
     admin = Admin.new(admin_params)
     if admin.save
+      session[:is_admin] = true
+      session[:id] = admin.id.to_s + "a"
       render json: {
         status: 201,
         admin: admin
@@ -25,7 +27,8 @@ class AdminsController < ApplicationController
     else
       render json: {
         status: 422,
-        admin: admin
+        admin: admin,
+        message: "This admin account could not be successfully created."
       }
     end
   end
@@ -51,6 +54,6 @@ class AdminsController < ApplicationController
 
   private
   def admin_params
-    params.required(:admin).permit(:name, :email, :is_lead_admin) # add password here eventually
+    params.required(:admin).permit(:name, :email, :is_lead_admin, :password) # add password here eventually
   end
 end
