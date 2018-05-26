@@ -18,8 +18,7 @@ class AdminsController < ApplicationController
   def create
     admin = Admin.new(admin_params)
     if admin.save
-      session[:is_admin] = true
-      session[:id] = admin.id.to_s + "a"
+      
       render json: {
         status: 201,
         admin: admin

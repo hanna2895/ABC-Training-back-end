@@ -4,4 +4,9 @@ Rails.application.routes.draw do
   resources :clients
   resources :groups
   resources :students
+  resources :sessions
+
+  post '/login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy'
+
 end
