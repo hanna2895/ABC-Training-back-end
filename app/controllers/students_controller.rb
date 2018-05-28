@@ -7,6 +7,14 @@ class StudentsController < ApplicationController
     }
   end
 
+  def unassigned
+    unassigned_students  = Student.where(:group_id => nil)
+    render json: {
+      status: 200,
+      unassigned_students: unassigned_students
+    }
+  end
+
   def show
     student = Student.find params[:id] # will need to change this once I add user log in functionality
     render json: {
@@ -14,6 +22,8 @@ class StudentsController < ApplicationController
       student: student
     }
   end
+
+
 
   def create
     student = Student.new(student_params)
@@ -51,6 +61,6 @@ class StudentsController < ApplicationController
 
   private
   def student_params
-    params.required(:student).permit(:name, :email, :group_id) # add password here eventually
+    params.required(:student).permit(:name, :email, :password) # add password here eventually
   end
 end
