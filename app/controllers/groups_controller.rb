@@ -19,7 +19,16 @@ class GroupsController < ApplicationController
     end
 
     def create
-      group = Group.new(group_params)
+
+      payload_body = request.body.read
+      if(payload_body != "")
+        payload = JSON.parse(payload_body).symbolize_keys
+      end
+
+      group = Group.new
+
+      group.name = payload[:name]
+      group.client_id = payload[:client_id]
 
       if group.save
         render json: {
@@ -35,13 +44,28 @@ class GroupsController < ApplicationController
     end
 
     def update
-      group = Group.find params[:id]
-      group.update(group_params)
 
-      render json: {
-        status: 200,
-        group: group
-      }
+      payload_body = request.body.read
+      if(payload_body != "")
+        payload = JSON.parse(payload_body).symbolize_keys
+      end
+
+      group = Group.find params[:id]
+
+      group.name = payload[:name]
+      group.client_id = payload[:client_id]
+
+      if group.save
+        render json: {
+          status: 200,
+          group: group
+        }
+      else
+        render json: {
+          status: 422,
+          group: group
+        }
+      end
     end
 
     def destroy
@@ -54,7 +78,7 @@ class GroupsController < ApplicationController
     private
 
     def group_params
-      params.required(:group).permit(:name, :client_id)
+      params.permit(:name, :client_id)
     end
 
 
