@@ -19,7 +19,16 @@ class ClientsController < ApplicationController
   end
 
   def create
-    client = Client.new(client_params)
+
+    payload_body = request.body.read
+    if(payload_body != "")
+      payload = JSON.parse(payload_body).symbolize_keys
+    end
+
+    client = Client.new
+
+    client.name = payload[:name]
+
     if client.save
       render json: {
         status: 201,
@@ -34,13 +43,22 @@ class ClientsController < ApplicationController
   end
 
   def update
-    client = Client.find params[:id]
-    client.update(client_params)
 
-    render json: {
-      status: 200,
-      client: client
-    }
+    payload_body = request.body.read
+    if(payload_body != "")
+      payload = JSON.parse(payload_body).symbolize_keys
+    end
+
+    client = Client.find params[:id]
+
+    client.name = payload[:name]
+
+    if client.save
+      render json: {
+        status: 200,
+        client: client
+      }
+    end
   end
 
   def destroy
@@ -49,13 +67,5 @@ class ClientsController < ApplicationController
       status: 204
     }
   end
-
-  private
-
-  def client_params
-    params.required(:client).permit(:name)
-  end
-
-
 
 end
