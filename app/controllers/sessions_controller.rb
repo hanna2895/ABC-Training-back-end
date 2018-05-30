@@ -2,23 +2,27 @@ class SessionsController < ApplicationController
   # use payload instead of params?
 
   def create
+
+    payload_body = request.body.read
+    if(payload_body != "")
+      payload = JSON.parse(payload_body).symbolize_keys
+    end
+
     # check if the person logging in is an admin or a student
     # Admins.find_by_email
     # if exists, cool. then authenticate
     # else, Students.find_by_email
     # if exists, cool. then authenticate
     # else sorry, try again.
-    admin = Admin.find_by_email(params[:email])
-    student = Student.find_by_email(params[:email])
-
+    admin = Admin.find_by_email(payload[:email])
+    student = Student.find_by_email(payload[:email])
 
     if admin
-      if admin && admin.authenticate(params[:password])
-        session[:is_admin] = true
-        session[:id] = admin.id.to_s + "a"
+      if admin && admin.authenticate(payload[:password])
         render json: {
           status: 200,
-          message: "You have successfully logged in as #{admin.name}"
+          message: "You have successfully logged in as #{admin.name}",
+          user_type: "admin"
         }
       else
         session[:message] = "Incorrect login credentials. Please try again."
@@ -28,12 +32,11 @@ class SessionsController < ApplicationController
         }
       end
     elsif student
-      if student && student.authenticate(params[:password])
-        session[:is_admin] = false
-        session[:id] = student.id.to_s + "s"
+      if student && student.authenticate(payload[:password])
         render json: {
           status: 200,
-          message: "You have successfully logged in as #{student.name}"
+          message: "You have successfully logged in as #{student.name}",
+          user_type: "student"
         }
       else
         session[:message] = "Incorrect login credentials. Please try again."

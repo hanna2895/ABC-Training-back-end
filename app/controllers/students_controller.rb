@@ -1,4 +1,5 @@
 class StudentsController < ApplicationController
+
   def index
     students = Student.all
     render json: {
@@ -26,7 +27,19 @@ class StudentsController < ApplicationController
 
 
   def create
-    student = Student.new(student_params)
+
+    payload_body = request.body.read
+    if(payload_body != "")
+      payload = JSON.parse(payload_body).symbolize_keys
+    end
+
+    student = Student.new
+
+    student.name = payload[:name]
+    student.email = payload[:email]
+    student.password = payload[:password]
+    student.group_id = payload[:group_id]
+
     if student.save
       render json: {
         status: 201,
@@ -41,12 +54,37 @@ class StudentsController < ApplicationController
   end
 
   def update
-    student = Student.find params[:id]
-    student.update(student_params)
-    render json: {
-      status: 202,
-      student: student
-    }
+
+    payload_body = request.body.read
+    if(payload_body != "")
+      payload = JSON.parse(payload_body).symbolize_keys
+    end
+
+    if payload[:name]
+      student.name = payload[:name]
+    end
+    if payload[:email]
+      student.email = payload[:email]
+    end
+    if payload[:password]
+      student.password = payload[:password]
+    end
+    if payload[:group_id]
+      student.group_id = payload[:group_id]
+    end
+
+    if student.save
+      render json: {
+        status: 202,
+        student: student
+      }
+    else
+      render json: {
+        status: 422,
+        student: student,
+        message: "This student was not successfully updated."
+      }
+    end
 
   end
 
@@ -59,8 +97,8 @@ class StudentsController < ApplicationController
   end
 
 
-  private
-  def student_params
-    params.required(:student).permit(:name, :email, :password) # add password here eventually
-  end
+  # private - probably can delete this
+  # def student_params
+  #   params.required(:student).permit(:name, :email, :password) # add password here eventually
+  # end
 end
