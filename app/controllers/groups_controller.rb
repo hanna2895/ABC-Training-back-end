@@ -52,8 +52,12 @@ class GroupsController < ApplicationController
 
       group = Group.find params[:id]
 
-      group.name = payload[:name]
-      group.client_id = payload[:client_id]
+      if payload[:name]
+        group.name = payload[:name]
+      end
+      if payload[:client_id]
+        group.client_id = payload[:client_id]
+      end
 
       if group.save
         render json: {
