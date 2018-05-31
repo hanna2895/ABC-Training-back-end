@@ -35,10 +35,18 @@ class StudentsController < ApplicationController
 
     student = Student.new
 
-    student.name = payload[:name]
-    student.email = payload[:email]
-    student.password = payload[:password]
-    student.group_id = payload[:group_id]
+    if payload[:name]
+      student.name = payload[:name]
+    end
+    if payload[:email]
+      student.email = payload[:email]
+    end
+    if payload[:password]
+      student.password = payload[:password]
+    end
+    if payload[:group_id]
+      student.group_id = payload[:group_id]
+    end
 
     if student.save
       render json: {
