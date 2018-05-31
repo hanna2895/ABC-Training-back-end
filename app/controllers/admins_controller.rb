@@ -17,7 +17,19 @@ class AdminsController < ApplicationController
   end
 
   def create
-    admin = Admin.new(admin_params)
+
+    payload_body = request.body.read
+    if(payload_body != "")
+      payload = JSON.parse(payload_body).symbolize_keys
+    end
+
+    admin = Admin.new
+
+    admin.name = payload[:name]
+    admin.email = payload[:email]
+    admin.password = payload[:password]
+    admin.is_lead_admin = payload[:is_lead_admin]
+
     if admin.save
 
       render json: {
@@ -34,12 +46,39 @@ class AdminsController < ApplicationController
   end
 
   def update
+
+    payload_body = request.body.read
+    if(payload_body != "")
+      payload = JSON.parse(payload_body).symbolize_keys
+    end
+
     admin = Admin.find params[:id]
-    admin.update(admin_params)
-    render json: {
-      status: 202,
-      admin: admin
-    }
+
+    if payload[:name]
+      admin.name = payload[:name]
+    end
+    if payload[:email]
+      admin.email = payload[:email]
+    end
+    if payload[:password]
+      admin.password = payload[:password]
+    end
+    if payload[:is_lead_admin]
+      admin.is_lead_admin = payload[:is_lead_admin]
+    end
+
+    if admin.save
+      render json: {
+        status: 202,
+        admin: admin
+      }
+    else
+      render json: {
+        status: 422,
+        admin: admin,
+        message: "This admin could not be successfully updated."
+      }
+    end
 
   end
 
@@ -52,8 +91,8 @@ class AdminsController < ApplicationController
   end
 
 
-  private
-  def admin_params
-    params.required(:admin).permit(:name, :email, :is_lead_admin, :password) # add password here eventually
-  end
+  # private
+  # def admin_params
+  #   params.required(:admin).permit(:name, :email, :is_lead_admin, :password) # add password here eventually
+  # end
 end

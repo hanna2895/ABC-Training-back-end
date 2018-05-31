@@ -22,7 +22,8 @@ class SessionsController < ApplicationController
         render json: {
           status: 200,
           message: "You have successfully logged in as #{admin.name}",
-          user_type: "admin"
+          user_type: "admin",
+          user_id: admin.id
         }
       else
         session[:message] = "Incorrect login credentials. Please try again."
@@ -36,7 +37,8 @@ class SessionsController < ApplicationController
         render json: {
           status: 200,
           message: "You have successfully logged in as #{student.name}",
-          user_type: "student"
+          user_type: "student",
+          user_id: student.id
         }
       else
         session[:message] = "Incorrect login credentials. Please try again."
