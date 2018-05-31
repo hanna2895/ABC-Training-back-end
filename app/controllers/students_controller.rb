@@ -68,6 +68,8 @@ class StudentsController < ApplicationController
       payload = JSON.parse(payload_body).symbolize_keys
     end
 
+    student = Student.find params[:id]
+
     if payload[:name]
       student.name = payload[:name]
     end
