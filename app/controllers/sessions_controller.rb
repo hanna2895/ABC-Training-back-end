@@ -23,7 +23,8 @@ class SessionsController < ApplicationController
           status: 200,
           message: "You have successfully logged in as #{admin.name}",
           user_type: "admin",
-          user_id: admin.id
+          user_id: admin.id,
+          user_name: admin.name
         }
       else
         session[:message] = "Incorrect login credentials. Please try again."
@@ -38,7 +39,8 @@ class SessionsController < ApplicationController
           status: 200,
           message: "You have successfully logged in as #{student.name}",
           user_type: "student",
-          user_id: student.id
+          user_id: student.id,
+          user_name: student.name
         }
       else
         session[:message] = "Incorrect login credentials. Please try again."
@@ -58,6 +60,11 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
+
+    render json: {
+      status: 200,
+      message: "User logged out"
+    }
   end
 
 end # end for controller
