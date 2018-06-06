@@ -8,7 +8,7 @@ gem 'rails', '~> 5.2.0'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 
-gem 'rails_12factor'
+# gem 'rails_12factor'
 
 # group :development, :test do
 #   gem 'pg', '>= 0.18', '< 2.0'
