@@ -51,7 +51,11 @@ class FileController < ApplicationController
   #
   #   # binding.pry
   #
-  #   file = File.new(params[:files])
+    file = File.new
+
+    file.name = payload[:name]
+    file.url = payload[:preview]
+
   #
   #   # file.name = params[:filename]
   #   #
@@ -77,18 +81,18 @@ class FileController < ApplicationController
   # #   puts ""
   # #
   # #
-  # #   if file.save
-  # #     render json: {
-  # #       status: 201,
-  # #       file: file
-  # #     }
-  # #   else
-  # #     render json: {
-  # #       status: 400,
-  # #       message: "Your file could not be uploaded.",
-  # #       file: file
-  # #     }
-  # #   end
+    if file.save
+      render json: {
+        status: 201,
+        file: file
+      }
+    else
+      render json: {
+        status: 400,
+        message: "Your file could not be uploaded.",
+        file: file
+      }
+    end
   end
 
   # def file_params
