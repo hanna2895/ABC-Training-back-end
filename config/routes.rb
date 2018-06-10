@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :groups
   resources :students
   resources :sessions
-  resources :file
+  resources :files
 
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
