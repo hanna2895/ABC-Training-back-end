@@ -26,21 +26,23 @@ class FileController < ApplicationController
     puts ""
     pp params
     puts "-----this is params from the create route in the file controller -----"
+    pp params[:files]
+    puts "--------- this is what files is ----------"
     puts ""
 
     # binding.pry
 
-    file = File.new(params[:files])
+    # file = File.new(params[:files])
 
-    file.name = params[:filename]
-
-    if params[:group_id]
-      file.group_id = params[:group_id]
-    end
-
-    if params[:description]
-      file.description = params[:description]
-    end
+    # file.name = params[:filename]
+    #
+    # if params[:group_id]
+    #   file.group_id = params[:group_id]
+    # end
+    #
+    # if params[:description]
+    #   file.description = params[:description]
+    # end
 
     # if params[:tempfile]
     #   file.url = params[:tempfile]
