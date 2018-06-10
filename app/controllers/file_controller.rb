@@ -17,11 +17,11 @@ class FileController < ApplicationController
   end
 
   def create
-    @file = File.new(params[:files])
+    @file = File.new(file_params)
 
     if @file.save
       #iterate through each of the files
-      params[:files][:document_data].each do |file|
+      params[:file][:document_data].each do |file|
           @file.documents.create!(:document => file)
           #create a document associated with the item that has just been created
         end
@@ -87,8 +87,12 @@ class FileController < ApplicationController
   # #   end
   # end
 
-  # def file_params
-  #   params.require(:files).permit(:name, :description, :document_data => []) #add document_data as a permitted parameter
-  # end
+  def file_params
+    puts ""
+    puts params[:files]
+    puts "this is params[:files]"
+    puts ""
+    params.require(:files).permit(:name, :description, :document_data => []) #add document_data as a permitted parameter
+  end
 
 end
