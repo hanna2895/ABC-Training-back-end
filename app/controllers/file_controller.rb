@@ -30,7 +30,7 @@ class FileController < ApplicationController
 
     # binding.pry
 
-    file = File.new
+    file = File.new(params[:files])
 
     file.name = params[:filename]
 
