@@ -27,6 +27,7 @@ class FileController < ApplicationController
     pp params
     puts "-----this is params from the create route in the file controller -----"
     pp params[:files]
+    pp params[:filename]
     puts "--------- this is what files is ----------"
     puts ""
 
@@ -52,24 +53,24 @@ class FileController < ApplicationController
     #
     # document.attach.params[:document]
     # file.url = url_for(file.document)
-
-    puts ""
-    pp file
-    puts ""
-
-
-    if file.save
-      render json: {
-        status: 201,
-        file: file
-      }
-    else
-      render json: {
-        status: 400,
-        message: "Your file could not be uploaded.",
-        file: file
-      }
-    end
-  end
+  #
+  #   puts ""
+  #   pp file
+  #   puts ""
+  #
+  #
+  #   if file.save
+  #     render json: {
+  #       status: 201,
+  #       file: file
+  #     }
+  #   else
+  #     render json: {
+  #       status: 400,
+  #       message: "Your file could not be uploaded.",
+  #       file: file
+  #     }
+  #   end
+  # end
 
 end
