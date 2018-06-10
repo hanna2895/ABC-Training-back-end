@@ -51,7 +51,8 @@ class FileController < ApplicationController
   #
   #   # binding.pry
   #
-    file = File.new(name: payload[:name], url: payload[:url])
+    file = File.new
+    # (name: payload[:name], url: payload[:url])
 
     # file.name = payload[:name]
     # file.url = payload[:preview]
