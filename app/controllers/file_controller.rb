@@ -89,7 +89,7 @@ class FileController < ApplicationController
   # #       file: file
   # #     }
   # #   end
-  # end
+  end
 
   # def file_params
   #   puts ""
