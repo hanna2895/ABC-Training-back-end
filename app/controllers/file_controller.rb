@@ -18,11 +18,18 @@ class FileController < ApplicationController
 
   def create
 
-    payload_body = request.body.read
-    if(payload_body != "")
-      payload = JSON.parse(payload_body).symbolize_keys
-    end
-    binding.pry
+    # payload_body = request.body.read
+    # if(payload_body != "")
+    #   payload = JSON.parse(payload_body).symbolize_keys
+    # end
+
+    puts ""
+    pp params
+    puts "-----this is params from the create route in the file controller -----"
+    puts ""
+
+    # binding.pry
+
     file = File.new
 
     file.name = params[:filename]
@@ -39,13 +46,10 @@ class FileController < ApplicationController
     #   file.url = params[:tempfile]
     # end
 
-    puts ""
-    pp params
-    puts "-----this is params from the create route in the file controller -----"
-    puts ""
 
-    document.attach.params[:document]
-    file.url = url_for(file.document)
+    #
+    # document.attach.params[:document]
+    # file.url = url_for(file.document)
 
     puts ""
     pp file
