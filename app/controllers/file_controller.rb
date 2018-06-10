@@ -16,20 +16,20 @@ class FileController < ApplicationController
     }
   end
 
-  def create
-    @file = File.new(file_params)
-
-    if @file.save
-      #iterate through each of the files
-      params[:file][:document_data].each do |file|
-          @file.documents.create!(:document => file)
-          #create a document associated with the item that has just been created
-        end
-        render :show, status: :created, location: @file
-    else
-      render json: @file.errors, status: :unprocessable_entity
-    end
-  end
+  # def create
+  #   @file = File.new(file_params)
+  #
+  #   if @file.save
+  #     #iterate through each of the files
+  #     params[:file][:document_data].each do |file|
+  #         @file.documents.create!(:document => file)
+  #         #create a document associated with the item that has just been created
+  #       end
+  #       render :show, status: :created, location: @file
+  #   else
+  #     render json: @file.errors, status: :unprocessable_entity
+  #   end
+  # end
 
   def create
   #
@@ -51,10 +51,10 @@ class FileController < ApplicationController
   #
   #   # binding.pry
   #
-    file = File.new
+    file = File.new(name: payload[:name], url: payload[:url])
 
-    file.name = payload[:name]
-    file.url = payload[:preview]
+    # file.name = payload[:name]
+    # file.url = payload[:preview]
 
   #
   #   # file.name = params[:filename]
