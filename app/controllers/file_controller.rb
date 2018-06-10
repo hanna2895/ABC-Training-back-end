@@ -27,13 +27,12 @@ class FileController < ApplicationController
     pp params
     puts "-----this is params from the create route in the file controller -----"
     pp params[:files]
-    pp params[:files[:filename]]
     puts "--------- this is what files is ----------"
     puts ""
 
     # binding.pry
 
-    # file = File.new(params[:files])
+    file = File.new(params[:files])
 
     # file.name = params[:filename]
     #
