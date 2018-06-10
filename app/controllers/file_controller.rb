@@ -31,19 +31,23 @@ class FileController < ApplicationController
     end
   end
 
-  # def create
+  def create
   #
-  #   # payload_body = request.body.read
-  #   # if(payload_body != "")
-  #   #   payload = JSON.parse(payload_body).symbolize_keys
-  #   # end
+    payload_body = request.body.read
+    if(payload_body != "")
+      payload = JSON.parse(payload_body).symbolize_keys
+    end
   #
-  #   puts ""
-  #   pp params
-  #   puts "-----this is params from the create route in the file controller -----"
-  #   pp params[:files]
-  #   puts "--------- this is what files is ----------"
-  #   puts ""
+    # puts ""
+    # pp params
+    # puts "-----this is params from the create route in the file controller -----"
+    # pp params[:files]
+    # puts "--------- this is what files is ----------"
+    # puts ""
+
+    puts ""
+    pp payload
+    puts ""
   #
   #   # binding.pry
   #
@@ -87,14 +91,14 @@ class FileController < ApplicationController
   # #   end
   # end
 
-  def file_params
-    puts ""
-    puts params[:files]
-    puts "this is params[:files]"
-    puts params[:file][:data]
-    puts "this is file data"
-    puts ""
-    # params.require(:files).permit(:name, :description, :document_data => []) #add document_data as a permitted parameter
-  end
+  # def file_params
+  #   puts ""
+  #   puts params[:files]
+  #   puts "this is params[:files]"
+  #   puts params[:file][:data]
+  #   puts "this is file data"
+  #   puts ""
+  #   # params.require(:files).permit(:name, :description, :document_data => []) #add document_data as a permitted parameter
+  # end
 
 end
