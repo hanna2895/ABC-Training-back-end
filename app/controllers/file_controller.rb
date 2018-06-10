@@ -88,7 +88,7 @@ class FileController < ApplicationController
   # end
 
   def file_params
-    params.require(:file).permit(:name, :description, :picture, :document_data => []) #add document_data as a permitted parameter
+    params.require(:files).permit(:name, :description, :document_data => []) #add document_data as a permitted parameter
   end
 
 end
