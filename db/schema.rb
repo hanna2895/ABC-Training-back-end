@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_31_202619) do
+ActiveRecord::Schema.define(version: 2018_06_10_161231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,12 +47,21 @@ ActiveRecord::Schema.define(version: 2018_05_31_202619) do
     t.string "name"
   end
 
+  create_table "documents", force: :cascade do |t|
+    t.bigint "file_id"
+    t.string "document"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["file_id"], name: "index_documents_on_file_id"
+  end
+
   create_table "files", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.string "url"
     t.integer "group_id"
     t.binary "document"
+    t.string "file"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -68,4 +77,5 @@ ActiveRecord::Schema.define(version: 2018_05_31_202619) do
     t.string "password_digest"
   end
 
+  add_foreign_key "documents", "files"
 end
