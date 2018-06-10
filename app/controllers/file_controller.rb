@@ -91,10 +91,10 @@ class FileController < ApplicationController
     puts ""
     puts params[:files]
     puts "this is params[:files]"
-    puts params[:files][:data]
+    puts params[:file][:data]
     puts "this is file data"
     puts ""
-    params.require(:files).permit(:name, :description, :document_data => []) #add document_data as a permitted parameter
+    # params.require(:files).permit(:name, :description, :document_data => []) #add document_data as a permitted parameter
   end
 
 end
