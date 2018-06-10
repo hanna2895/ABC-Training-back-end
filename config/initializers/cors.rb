@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'abc-training-1.herokuapp.com'
+    origins 'abc-training-1.herokuapp.com', 'localhost:3001'
     # origins '*'
 
     resource '*',
@@ -16,13 +16,4 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
       credentials: true
   end
 
-  allow do
-    origins 'localhost:3001'
-    # origins '*'
-
-    resource '*',
-      headers: :any,
-      methods: %i(get post put patch delete options head),
-      credentials: true
-  end
 end
