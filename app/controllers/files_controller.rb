@@ -1,4 +1,4 @@
-class FileController < ApplicationController
+class FilesController < ApplicationController
 
   def index
     files = File.all
