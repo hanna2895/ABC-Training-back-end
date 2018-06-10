@@ -71,6 +71,6 @@ class FileController < ApplicationController
   #       file: file
   #     }
   #   end
-  # end
+  end
 
 end
